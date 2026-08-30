@@ -1,0 +1,4 @@
+interface:
+  display_name: "Nota"
+  short_description: "Publish and manage Markdown with Nota"
+  default_prompt: "Use $nota to publish these Markdown files and return the Nota URL."
