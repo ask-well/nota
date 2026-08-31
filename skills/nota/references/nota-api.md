@@ -3,6 +3,9 @@
 Use the active Nota origin selected by `SKILL.md`. Preserve returned publication and document URLs
 exactly, and never send `ONA_API_KEY` to a different origin.
 
+If an authenticated operation needs `X-API-KEY` and `ONA_API_KEY` is absent, complete the browser
+device authorization flow in `SKILL.md` first, then resume this API operation.
+
 When the user has not supplied a target Nota URL, use the active Nota origin; create at
 `{nota_origin}/share`. Do not infer the business API origin from where the Skill was installed.
 When the user supplies a complete Nota URL, preserve it rather than reconstructing it. If its

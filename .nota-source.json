@@ -11,24 +11,29 @@
       "sha256": "cb7be73dae8f256230cc0de7ee231fd657e9c23a4e18e05575ecd8e4008ac06d"
     },
     {
-      "bytes": 2175,
+      "bytes": 4274,
       "path": "skills/nota/SKILL.md",
-      "sha256": "4ec110824ff244b430f8d7bcbce5bf33a914ef64a2ca3807e86c6541f5332300"
+      "sha256": "bdd36d6a6e5ec59a0a2719fb43a7093804202892e0d5a7d4cae0dd08968d8c18"
     },
     {
-      "bytes": 182,
+      "bytes": 171,
       "path": "skills/nota/agents/openai.yaml",
-      "sha256": "764c45a9dd081c782a982ae3b35ff1921fc891a7e93f52ed8257ec99786fddde"
+      "sha256": "6245ed68a3f2dd7be9cb690e4253f06e66df9cac3e569a685d8c561d721642d4"
     },
     {
-      "bytes": 5052,
+      "bytes": 473,
+      "path": "skills/nota/references/device-auth.md",
+      "sha256": "f1789749f7a9e2fc2c42875086e6920a5235bbedb192dcc33d21bb0a420b4c1e"
+    },
+    {
+      "bytes": 5230,
       "path": "skills/nota/references/nota-api.md",
-      "sha256": "981b8fb8d018de77abfd3f786d0912bedd67cb5316c7821743a24235969a0344"
+      "sha256": "b7af67f3fccab0dbd7ecb30d2943fecb1277ca3ad56594392693812a831daadc"
     }
   ],
   "schema_version": 1,
-  "skill_version": "0.2.0",
+  "skill_version": "0.3.1",
   "source_repository": "weworklabs/nota",
-  "source_sha": "d63e741b18d777f0f37806dfd17861f1a961f616",
-  "tree_sha256": "ddd44e473ffda9bdaa31fc04886cb84adc9e8e2c5d6eccef6ba7e21b3ce2055a"
+  "source_sha": "098670304892dddc1ca890487ea3c3ac4c33ce2c",
+  "tree_sha256": "cf92fbb1e92642ffa3f5648d26b939abfc82e1577362ee66cd2c4f1e92b55929"
 }
