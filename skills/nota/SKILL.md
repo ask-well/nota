@@ -1,11 +1,11 @@
 ---
 name: nota
-description: Use Nota to turn content into shareable links, read Nota URLs, and update or remove previously published content.
+description: Use Nota to create and read shareable Markdown Documents, update or remove owned content, and work with Page comments.
 license: MIT
 metadata:
   short-description: Use Nota with an agent
-  version: 0.3.1
-  released-at: "2026-08-31T03:15:07Z"
+  version: 0.4.0
+  released-at: "2026-09-01T13:33:50Z"
 ---
 
 # Nota
@@ -22,20 +22,21 @@ path, query, or fragment; reject an invalid override instead of falling back to 
 
 - Treat a natural request to make the relevant content shareable as a Nota create request. Choose
   and organize the visible content that serves the request; do not require the user to say Nota,
-  Markdown, Publication, or a fixed command. When they want other people to open the result, create
+  Markdown, Document, or a fixed command. When they want other people to open the result, create
   it with `share=link` and return Nota's complete URL.
-- For any Nota URL, or for create, replace, sharing, and deletion requests, read
-  [Publication API](references/nota-api.md).
+- For any Nota URL, or for Document create, replace, sharing, deletion, and Comment requests, read
+  [Document API](references/nota-api.md).
 - Preserve every complete URL returned by Nota. A document URL is valid for reads but not for
   mutations. Before replacing, changing sharing, or deleting from an arbitrary Nota URL, read its
-  JSON representation and use the server-returned publication URL; never strip path segments or
-  reconstruct that URL.
-- Nota has no publication list, attachment upload, history, or restore API. State these limits
+  JSON representation and use the server-returned Document root URL: top-level `url` for a
+  Document response, or compatibility `publication.url` for a Page response. Never strip path
+  segments or reconstruct that URL.
+- Nota has no Document list, attachment upload, history, or restore API. State these limits
   when they affect the request; do not invent substitutes.
 
 ## Authorization
 
-Anonymous reads are valid only for `link` publications. Owner reads and every mutation use
+Anonymous reads are valid only for `link` Documents. Owner reads and every mutation use
 `X-API-KEY`.
 
 Use only the Agent-private `ONA_API_KEY` credential for authenticated requests, and send it only
