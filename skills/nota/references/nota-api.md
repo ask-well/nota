@@ -2,8 +2,8 @@
 
 Nota's product model is `Document > Page > Representation`: a Document is the owner, visibility,
 comments, and lifecycle boundary; a Page is one Markdown content unit; HTML, Markdown, and JSON are
-representations rather than separate resources. Existing `/share` routes and `documents` JSON fields
-remain compatible.
+representations rather than separate resources. `/share` is the stable URL surface; request and
+response bodies use `pages` for Page collections.
 
 Use the active Nota origin selected by `SKILL.md`. Preserve returned Document and Page URLs
 exactly, and never send `ONA_API_KEY` to a different origin.
@@ -19,10 +19,10 @@ operations require an explicit matching `ONA_NOTA_ORIGIN` before sending `ONA_AP
 
 ## Read
 
-- `GET {publication_url}` returns server-rendered HTML by default.
-- `GET {publication_url}?format=markdown` returns the default document as Markdown.
-- `GET {publication_url}?format=json` returns Document metadata without Markdown bodies.
-- `GET {publication_url}/{relative_path}?format=markdown|json` reads one named document.
+- `GET {document_url}` returns server-rendered HTML by default.
+- `GET {document_url}?format=markdown` returns the default Page as Markdown.
+- `GET {document_url}?format=json` returns Document metadata without Markdown bodies.
+- `GET {document_url}/{relative_path}?format=markdown|json` reads one named Page.
 - The `format` query takes precedence over `Accept`.
 - Save the response `ETag`; every Page in one Document shares the Document ETag. Comments use a
   separate comments ETag and do not change this ETag.
@@ -40,7 +40,7 @@ Send `POST {nota_base}/share` with `Content-Type: application/json` and `X-API-K
   "share": "private",
   "comments": "open",
   "default_path": "README.md",
-  "documents": [
+  "pages": [
     {
       "path": "README.md",
       "title": "Overview",
@@ -56,15 +56,15 @@ Rules that change requests:
 - Use `share=link` when the user asks for a link others can read.
 - Omit `comments` unless the user explicitly asks for `locked` or `off`; new Documents default to
   `open`.
-- `documents` is non-empty and has at most 50 items. Paths are unique, case-sensitive,
+- `pages` is non-empty and has at most 50 items. Paths are unique, case-sensitive,
   normalized UTF-8 relative paths with no empty, `.`, `..`, backslash, or leading `/` segment.
-- `default_path`, when present, matches one submitted path; otherwise the first document is used.
+- `default_path`, when present, matches one submitted path; otherwise the first Page is used.
 - Each Markdown body is at most 10 MiB, all Markdown at most 20 MiB, and the encoded JSON body at
   most 21 MiB.
 
 On `201`, retain the complete `Location`/response URL and `ETag`. Report
 `relative_image_not_uploaded` warnings; Nota does not upload relative images or attachments. The
-response `documents[]` entries include the opaque Page `id` needed by Comment APIs.
+response `pages[]` entries include the opaque Page `id` needed by Comment APIs.
 
 ## Comments
 
@@ -126,11 +126,11 @@ There is no single-Page update. To update:
 
 1. If the input may be a Page URL, GET its `?format=json` representation and take the complete
    Document root URL from the response: top-level `url` for a Document response, or
-   `publication.url` for a Page response. Otherwise GET `{publication_url}?format=json`. Save the
+   `document.url` for a Page response. Otherwise GET `{document_url}?format=json`. Save the
    current ETag.
-2. Read any current Markdown needed to preserve unchanged documents.
+2. Read any current Markdown needed to preserve unchanged pages.
 3. Build the entire desired snapshot using the create body without `share`.
-4. Send `PUT {publication_url}` with `X-API-KEY` and `If-Match: {current_etag}`.
+4. Send `PUT {document_url}` with `X-API-KEY` and `If-Match: {current_etag}`.
 
 Paths omitted from the PUT disappear. On `409 version_conflict`, re-read the current Document
 metadata and affected Markdown, explain the conflict, and ask whether to merge or replace. Never
@@ -140,7 +140,7 @@ ETag before deciding whether a retry is needed.
 ## Change sharing
 
 Resolve a document URL through its JSON response if necessary, read the current ETag, then send
-`PATCH {publication_url}` with `X-API-KEY`, `If-Match`, and one of:
+`PATCH {document_url}` with `X-API-KEY`, `If-Match`, and one of:
 
 ```json
 { "share": "link" }
@@ -157,7 +157,7 @@ only current remedy is permanent deletion followed by a new Document.
 
 Explain that deletion is irreversible and obtain explicit confirmation. Resolve a document URL
 through its JSON response if necessary, then read the current ETag and send
-`DELETE {publication_url}` with `X-API-KEY` and `If-Match`. A `204` means reads are permanently
+`DELETE {document_url}` with `X-API-KEY` and `If-Match`. A `204` means reads are permanently
 `404`; physical content cleanup is asynchronous. Do not retry a deletion whose result is unknown
 until a follow-up read establishes the visible state.
 

@@ -11,9 +11,9 @@
       "sha256": "cb7be73dae8f256230cc0de7ee231fd657e9c23a4e18e05575ecd8e4008ac06d"
     },
     {
-      "bytes": 4386,
+      "bytes": 4365,
       "path": "skills/nota/SKILL.md",
-      "sha256": "570dab8c685cf4414d19fd8eb8735cb5202a532f71a5a114b297da4d97aac2f3"
+      "sha256": "cb7f5d1605f5554687f8d74efcfa92e96ffbda951fc5e68d54df3daea6a9c2c3"
     },
     {
       "bytes": 171,
@@ -26,14 +26,14 @@
       "sha256": "f1789749f7a9e2fc2c42875086e6920a5235bbedb192dcc33d21bb0a420b4c1e"
     },
     {
-      "bytes": 8505,
+      "bytes": 8476,
       "path": "skills/nota/references/nota-api.md",
-      "sha256": "bcf4408adc9305c8e70dca0bd58470264aea3ee410a2bb106b825d2d329f16bf"
+      "sha256": "5416694cf9121b450c543cb3402cd6cbbed80e1327f22f0d3712d08ba293575e"
     }
   ],
   "schema_version": 1,
-  "skill_version": "0.4.0",
+  "skill_version": "0.4.1",
   "source_repository": "weworklabs/nota",
-  "source_sha": "b5398d795d31852241e91bd0e73b0e10e025f867",
-  "tree_sha256": "7a09730a6a042302fa0daa657e218cef5e56cab6279d1014075d2eb3817f3f83"
+  "source_sha": "35d17964da99c4d341e1ada2fbfbf6050c783ef7",
+  "tree_sha256": "cd28e8e84ffae29de7d1701eb479e45a5545d5c2aefa3dbb227c0c3e9ecb3b6e"
 }
