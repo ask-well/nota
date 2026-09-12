@@ -4,8 +4,8 @@ description: Use Nota to create and read shareable Markdown Documents, update or
 license: MIT
 metadata:
   short-description: Use Nota with an agent
-  version: 0.4.1
-  released-at: "2026-09-01T23:59:55Z"
+  version: 0.5.0
+  released-at: "2026-09-12T00:00:00Z"
 ---
 
 # Nota
@@ -24,14 +24,17 @@ path, query, or fragment; reject an invalid override instead of falling back to 
   and organize the visible content that serves the request; do not require the user to say Nota,
   Markdown, Document, or a fixed command. When they want other people to open the result, create
   it with `share=link` and return Nota's complete URL.
-- For any Nota URL, or for Document create, replace, sharing, deletion, and Comment requests, read
+- For any Nota URL, or for Document discovery, create, editing, sharing, deletion, and Comment requests, read
   [Document API](references/nota-api.md).
+- Discover owned Documents with the authenticated list API, including title, sharing, and updated-date filters.
+  Use returned URLs and resource IDs to continue the task. Distinguish empty results from failures; resolve
+  an ambiguous target before changing it.
 - Preserve every complete URL returned by Nota. A Page URL is valid for reads but not for
   mutations. Before replacing, changing sharing, or deleting from an arbitrary Nota URL, read its
   JSON representation and use the server-returned Document root URL: top-level `url` for a
   Document response, or `document.url` for a Page response. Never strip path
   segments or reconstruct that URL.
-- Nota has no Document list, attachment upload, history, or restore API. State these limits
+- Nota has no attachment upload, history, or restore API. State these limits
   when they affect the request; do not invent substitutes.
 
 ## Authorization

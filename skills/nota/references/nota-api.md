@@ -17,6 +17,28 @@ When the user supplies a complete Nota URL, preserve it rather than reconstructi
 origin differs from the active Nota origin, anonymous reads may proceed, but authenticated
 operations require an explicit matching `ONA_NOTA_ORIGIN` before sending `ONA_API_KEY`.
 
+## Discover your documents
+
+`GET {nota_origin}/api/documents` with `X-API-KEY` returns only your undeleted Documents, including private ones.
+Query parameters: `q` is a trimmed, case-insensitive literal title substring (up to 256 UTF-8 bytes),
+`share=all|private|link`, `updated=any|today|7d|30d`, `page_index` (zero-based, default 0),
+`page_size` (1–100, default 25), and `order_by` (comma-separated `field.asc|desc`).
+Supported fields are `updated_at`, `title`, `id`; default `updated_at.desc,id.asc`. An omitted ID tie-breaker
+becomes `id.asc`. Relative dates include today and the previous 6/29 UTC dates. All filters intersect.
+
+The response is `{items, page_index, page_size, total_pages, total_items}`. Each item contains
+`id`, `title`, `url`, `share`, `revision`, `updated_at`. It has no Page bodies; read the returned complete URL
+to continue. An out-of-range page has empty items and the real total. Invalid, duplicate, or unknown query
+parameters return 400. Results are private and never cached; storage failures are not empty collections.
+
+## Edit one Page
+
+Send `PATCH {nota_origin}/api/documents/{document_id}/pages/{page_id}` with `X-API-KEY`, the current
+Document `If-Match`, and `{"markdown":"..."}`. Obtain IDs and the ETag from the resource response.
+Only this Page's body changes; paths, titles, other Pages, sharing and comments remain intact.
+Unchanged Markdown does not advance the revision. Conflicts require reading the latest content and an
+explicit merge/replace decision before trying with its revision. The response is the updated Document.
+
 ## Read
 
 - `GET {document_url}` returns server-rendered HTML by default.
@@ -122,7 +144,7 @@ recoverable.
 
 ## Replace the complete snapshot
 
-There is no single-Page update. To update:
+Use whole-snapshot replacement when changing the Document title or Page collection:
 
 1. If the input may be a Page URL, GET its `?format=json` representation and take the complete
    Document root URL from the response: top-level `url` for a Document response, or
