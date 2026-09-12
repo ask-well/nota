@@ -11,9 +11,9 @@
       "sha256": "cb7be73dae8f256230cc0de7ee231fd657e9c23a4e18e05575ecd8e4008ac06d"
     },
     {
-      "bytes": 4660,
+      "bytes": 4670,
       "path": "skills/nota/SKILL.md",
-      "sha256": "132dc5ffab0eda5b8ad00c2834e1cab76a095ba66c7477b5757137195e35c12f"
+      "sha256": "1fcb551374e90ebb569e1c32c673c754b234cdd1adb2789173ff1f4895b1ae84"
     },
     {
       "bytes": 171,
@@ -32,8 +32,8 @@
     }
   ],
   "schema_version": 1,
-  "skill_version": "0.6.0",
+  "skill_version": "0.6.1",
   "source_repository": "weworklabs/nota",
-  "source_sha": "750c4a79e756873b04a7dfeedae7247d5507acd1",
-  "tree_sha256": "21605c29ae51adca41a1e05e64b27ad6db0d44a77d929482e4678d313cbdba14"
+  "source_sha": "f6291bb79c8925ae381eec494b44225313459f0a",
+  "tree_sha256": "e6cc76cf3f94871d61e971336c7772700838fb0c8d242544e641d193cf167808"
 }

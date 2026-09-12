@@ -1,10 +1,10 @@
 ---
 name: nota
-description: Use Nota to create and read shareable Markdown Documents, update or remove owned content, manage personal favorites, and work with Page comments.
+description: Use Nota for any nota.ona.cool URL, or to create, discover, read, edit, share, or delete Markdown Documents, manage Favorites, and work with Page comments.
 license: MIT
 metadata:
   short-description: Use Nota with an agent
-  version: 0.6.0
+  version: 0.6.1
   released-at: "2026-09-12T00:00:00Z"
 ---
 
