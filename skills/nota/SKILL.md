@@ -1,10 +1,10 @@
 ---
 name: nota
-description: Use Nota to create and read shareable Markdown Documents, update or remove owned content, and work with Page comments.
+description: Use Nota to create and read shareable Markdown Documents, update or remove owned content, manage personal favorites, and work with Page comments.
 license: MIT
 metadata:
   short-description: Use Nota with an agent
-  version: 0.5.0
+  version: 0.6.0
   released-at: "2026-09-12T00:00:00Z"
 ---
 
@@ -24,7 +24,7 @@ path, query, or fragment; reject an invalid override instead of falling back to 
   and organize the visible content that serves the request; do not require the user to say Nota,
   Markdown, Document, or a fixed command. When they want other people to open the result, create
   it with `share=link` and return Nota's complete URL.
-- For any Nota URL, or for Document discovery, create, editing, sharing, deletion, and Comment requests, read
+- For any Nota URL, or for Document discovery, create, editing, sharing, deletion, Favorite, and Comment requests, read
   [Document API](references/nota-api.md).
 - Discover owned Documents with the authenticated list API, including title, sharing, and updated-date filters.
   Use returned URLs and resource IDs to continue the task. Distinguish empty results from failures; resolve

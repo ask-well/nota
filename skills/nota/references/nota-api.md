@@ -31,6 +31,27 @@ The response is `{items, page_index, page_size, total_pages, total_items}`. Each
 to continue. An out-of-range page has empty items and the real total. Invalid, duplicate, or unknown query
 parameters return 400. Results are private and never cached; storage failures are not empty collections.
 
+## Favorites
+
+A Favorite is a private relation between the authenticated user and a whole Document. It does not
+copy content or grant access. Use a Document ID returned by its JSON representation or a list response.
+
+- `GET {nota_origin}/api/favorites/{document_id}` returns `{document_id, favorited, favorited_at}`;
+  `favorited_at` is a UTC timestamp or null.
+- `PUT` that resource with `X-API-KEY` favorites a readable Document and returns the same state.
+  Repeating it preserves the original favorite time. No body or Document `If-Match` is needed.
+- `DELETE` that resource with `X-API-KEY` removes only your Favorite and returns 204, including
+  repeated removal or an unavailable Document. The Document and other users' Favorites remain intact.
+- `GET {nota_origin}/api/favorites` lists your currently readable Favorites using the same filters and
+  `Paged` response as document discovery. Sort fields additionally include `favorited_at`, with default
+  `favorited_at.desc,id.asc`. Items include the current Document summary plus `favorited_at`.
+
+You can favorite your own private/link Documents and another owner's link Document. GET/PUT return
+404 when the Document is unavailable to you. If another owner withdraws sharing, its Favorite is
+hidden until sharing resumes; the relation and original favorite time remain. Document deletion
+removes its Favorite relations. Empty results and service errors remain distinct. Removing a Favorite
+is a reversible personal operation; it is not permanent Document deletion.
+
 ## Edit one Page
 
 Send `PATCH {nota_origin}/api/documents/{document_id}/pages/{page_id}` with `X-API-KEY`, the current
